@@ -1,0 +1,7 @@
+/node_modules
+app/models/tutorial.model.js
+app/routes/user.routes.js
+app/routes/tutorial.routes.js
+app/models/user.model.js
+app/controllers/user.controller.js
+app/controllers/tutorial.controller.js
