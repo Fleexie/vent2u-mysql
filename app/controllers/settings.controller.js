@@ -27,7 +27,7 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the settings."
+          err.message || "Some error occurred while creating the settings/setting."
       });
     });
 };
@@ -44,7 +44,7 @@ exports.findAll = (req, res) => {
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving settings."
+            err.message || "Some error occurred while retrieving settings/setting."
         });
       });
   
@@ -60,33 +60,7 @@ exports.findOne = (req, res) => {
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error retrieving Tutorial with id=" + id
-        });
-      });
-  
-};
-
-// Update a settings by the id in the request
-exports.update = (req, res) => {
-    const id = req.params.id;
-
-    Setting.update(req.body, {
-      where: { id: id }
-    })
-      .then(num => {
-        if (num == 1) {
-          res.send({
-            message: "settings was updated successfully."
-          });
-        } else {
-          res.send({
-            message: `Cannot update settings with id=${id}. Maybe Tutorial was not found or req.body is empty!`
-          });
-        }
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Error updating settings with id=" + id
+          message: "Error retrieving settings/preset with id=" + id
         });
       });
   
@@ -102,17 +76,17 @@ exports.delete = (req, res) => {
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "settings was deleted successfully!"
+            message: "settings/preset was deleted successfully!"
           });
         } else {
           res.send({
-            message: `Cannot delete Tutorial with id=${id}. Maybe settings was not found!`
+            message: `Cannot delete Setting/preset with id=${id}. Maybe settings/preset was not found!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Could not delete settings with id=" + id
+          message: "Could not delete settings/preset with id=" + id
         });
       });
   

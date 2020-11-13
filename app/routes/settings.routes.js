@@ -12,9 +12,6 @@ module.exports = app => {
     // Retrieve a single settings with id
     router.get("/:id", settings.findOne);
   
-    // Update a settings with id
-    router.put("/:id", settings.update);
-  
     // Delete a settings with id
     router.delete("/:id", settings.delete);
   
