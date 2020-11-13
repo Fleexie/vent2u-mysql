@@ -6,13 +6,16 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true
       },
       temperature: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        required: true
       },
       humidity: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        required: true
       },
       light: {
-          type: Sequelize.STRING
+          type: Sequelize.INTEGER,
+          required: true
       },
       uid: {
           type: Sequelize.INTEGER,
