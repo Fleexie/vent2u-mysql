@@ -18,7 +18,10 @@ module.exports = (sequelize, Sequelize) => {
           type: Sequelize.INTEGER,
           foreignKey: true
       }
-    });
+    },
+    {
+      timestamps: false
+   });
   
     return Setting;
   };

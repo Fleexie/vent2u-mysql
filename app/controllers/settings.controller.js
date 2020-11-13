@@ -4,7 +4,6 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new settings
 exports.create = (req, res) => {
-  // Validate request
   if (!req.body.temperature) {
     res.status(400).send({
       message: "Content can not be empty!"
