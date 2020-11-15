@@ -1,7 +1,6 @@
 const db = require("../models");
-const Register = db.users;
+const Users = db.users;
 const bcrypt = require('bcrypt');
-const passport = require('passport');;
 
 exports.create = ( req, res)=>{
     if (!req.body.username) {
@@ -20,7 +19,7 @@ exports.create = ( req, res)=>{
             console.log(err);
           }
           user.password = hash;
-          Register.create(user).then(data=>{
+          Users.create(user).then(data=>{
               res.send(data);
           })
           .catch(err => {
@@ -33,3 +32,18 @@ exports.create = ( req, res)=>{
       });
     
   };
+ 
+  exports.findAll = (req, res) => {
+    const username = req.params.username
+      Users.findAll({ where: {username: `${username}`} })
+        .then(data => {
+          res.send(data);
+        })
+        .catch(err => {
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while retrieving settings."
+          });
+        });
+    
+    };
