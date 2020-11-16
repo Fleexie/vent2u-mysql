@@ -7,10 +7,10 @@ module.exports = app => {
     router.post("/", settings.create);
   
     // Retrieve all settings
-    router.get("/", settings.findAll);
+    router.get("/:id", settings.findAll);
 
     // Retrieve a single settings with id
-    router.get("/:id", settings.findOne);
+    // router.get("/:id", settings.findOne);
   
     // Delete a settings with id
     router.delete("/:id", settings.delete);
