@@ -71,7 +71,7 @@ exports.delete = (req, res) => {
   const id = req.params.id;
 
   Setting.destroy({
-    where: { uid: id },
+    where: { id: id },
   })
     .then((num) => {
       if (num == 1) {
