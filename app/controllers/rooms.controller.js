@@ -1,8 +1,9 @@
-import { rooms } from "../models";
+const db = require("../models");
+const rooms = db.rooms;
 const Rooms = rooms;
 
-export function findAll(req, res) {
-    Rooms.findAll({})
+exports.findAll = (req, res) => {
+    Rooms.findAll()
         .then(data => {
             res.send(data);
         })
