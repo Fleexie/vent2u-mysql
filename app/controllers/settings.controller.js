@@ -35,7 +35,6 @@ exports.create = (req, res) => {
 // Retrieve all settings from the database.
 exports.findAll = (req, res) => {
     const id = req.params.id;
-    // var condition = uid ? { uid: { [Op.like]: `%${uid}%` } } : null;
 
     Setting.findAll({ where: { uid: `${id}` } })
         .then((data) => {
