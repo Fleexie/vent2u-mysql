@@ -1,0 +1,11 @@
+{
+    "name": "my-project",
+    "jest": {
+      "verbose": true
+    },
+    "testMatch": [
+        "<rootDir>/app.test.js",
+        "<rootDir>/routes/**/*.routes.test.js"
+    ],
+    "setupFilesAfterEnv":  ["./jest.setup.js"]
+  }
