@@ -1,15 +1,15 @@
 module.exports = (app) => {
-    const rooms = require("../../controllers/rooms.controller.js");
-    var router = require("express").Router();
+  const rooms = require('../../controllers/rooms.controller.js');
+  const router = require('express').Router();
 
-    /**
+  /**
      * @swagger
-     * tags: 
+     * tags:
      *  name: Rooms
      *  description: API to manage your users.
      */
 
-    /**
+  /**
      * @swagger
      *
      * /api/rooms:
@@ -23,7 +23,45 @@ module.exports = (app) => {
      *       200:
      *         description: List of all rooms
      */
-    router.get("/", rooms.findAll);
+  router.get('/', rooms.findAll);
 
-    app.use("/api/rooms", router);
+  /**
+     * @swagger
+     *
+     * /api/rooms:
+     *   post:
+     *     description: Adds a room
+     *     produces:
+     *       - application/json
+     *     tags:
+     *       - Rooms
+     *     responses:
+     *       201:
+     *         description: Room object
+     */
+  router.post('/', rooms.addRoom);
+
+  /**
+     * @swagger
+     *
+     * /api/rooms/{room_ID}:
+     *   delete:
+     *     description: Removes a room
+     *     produces:
+     *       - application/json
+     *     tags:
+     *       - Rooms
+     *     parameters:
+     *       - in: path
+     *         name: room_ID
+     *         description: ID of a room
+     *         required: true
+     *         type: integer
+     *     responses:
+     *       200:
+     *         description: Room object
+     */
+  router.delete('/:id', rooms.removeRoom);
+
+  app.use('/api/rooms', router);
 };

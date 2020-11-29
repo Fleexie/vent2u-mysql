@@ -1,11 +1,13 @@
 {
     "name": "my-project",
-    "jest": {
-      "verbose": true
-    },
+    "verbose": true,
     "testMatch": [
         "<rootDir>/app.test.js",
-        "<rootDir>/routes/**/*.routes.test.js"
+        "<rootDir>/app/routes/**/*.routes.test.js"
     ],
-    "setupFilesAfterEnv":  ["./jest.setup.js"]
+    "setupFilesAfterEnv":  ["./jest.setup.js"],
+    "reporters": [
+        "default",
+        "jest-html-reporters"
+    ]
   }
