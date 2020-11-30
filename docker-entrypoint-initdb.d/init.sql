@@ -4,6 +4,7 @@ use vent2k;
 
 CREATE TABLE `rooms` (
   `room_ID` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
   PRIMARY KEY (`room_ID`),
   UNIQUE KEY `room_ID` (`room_ID`)
 );
@@ -13,7 +14,7 @@ CREATE TABLE `climate_zones` (
   `climate_zone_ID` int NOT NULL AUTO_INCREMENT,
   `FK_Room` int NOT NULL,
   PRIMARY KEY (`climate_zone_ID`),
-  UNIQUE KEY `climate_zone_ID` (`climate_zone_ID`),
+  UNIQUE KEY`climate_zone_ID` (`climate_zone_ID`),
   KEY `FK_Room` (`FK_Room`),
   CONSTRAINT `climate_zones_ibfk_1` FOREIGN KEY (`FK_Room`) REFERENCES `rooms` (`room_ID`)
 );
@@ -39,11 +40,10 @@ CREATE TABLE `presets` (
   CONSTRAINT `presets_ibfk_2` FOREIGN KEY (`FK_Climate_Zone`) REFERENCES `climate_zones` (`climate_zone_ID`)
 );
 
-
-insert into rooms (room_ID) values (1);
-insert into rooms (room_ID) values (2);
-insert into rooms (room_ID) values (3);
-insert into rooms (room_ID) values (4);
+insert into rooms (room_ID, `name`) values (1, 'copenhagen');
+insert into rooms (room_ID,`name`)) values (2, 'valby');
+insert into rooms (room_ID,`name`)) values (3, 'roskilde');
+insert into rooms (room_ID, `name`)) values (4, 'berlin');
 
 insert into climate_zones (climate_zone_ID, FK_Room) values (1, 1);
 insert into climate_zones (climate_zone_ID, FK_Room) values (2, 1);
