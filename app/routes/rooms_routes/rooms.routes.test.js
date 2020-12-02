@@ -29,7 +29,9 @@ describe('POST room', () => {
   it('should add a room', async () => {
     await request(app)
         .post('/api/rooms')
-        .send({})
+        .send({
+          name: 'test room'
+        })
         .then((response) => {
           expect(response.status).toBe(201);
         });
@@ -40,7 +42,9 @@ describe('DELETE room', () => {
   it('should return status code 200', async () => {
     const newRoomId = await request(app)
         .post('/api/rooms')
-        .send({})
+        .send({
+          name: 'test room'
+        })
         .then((response) => {
           return response.body.room_ID;
         });
@@ -55,7 +59,9 @@ describe('DELETE room', () => {
   it('should return a ID of the deleted room', async () => {
     const newRoomId = await request(app)
         .post('/api/rooms')
-        .send({})
+        .send({
+          name: 'test room'
+        })
         .then((response) => {
           return response.body.room_ID;
         });

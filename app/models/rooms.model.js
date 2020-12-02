@@ -4,7 +4,9 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
-        }
+        },
+        name: Sequelize.STRING
+
     }, {
         timestamps: false
     });

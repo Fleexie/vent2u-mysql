@@ -1,13 +1,13 @@
 const app = require('../../../app');
 const request = require('supertest');
 
-describe('GET climateZones', () => {
-  it('should get a list of climateZones', async (done) => {
+describe('GET seats', () => {
+  it('should get a list of seats', async (done) => {
     await request(app)
-        .get('/api/climateZones')
+        .get('/api/seats')
         .then((response) => {
           /**
-           * length is the number of climateZones
+           * length is the number of seats
            */
           const {
             length,
@@ -19,7 +19,7 @@ describe('GET climateZones', () => {
 
   it('should get the status of 200', async (done) => {
     await request(app)
-        .get('/api/climateZones')
+        .get('/api/seats')
         .then((response) => {
           const {
             status,
@@ -33,9 +33,8 @@ describe('GET climateZones', () => {
 describe('GET climate zones by id', () => {
   it('should return status code 200', async (done) => {
     const newClimateZoneId = await request(app)
-        .post('/api/climateZones')
+        .post('/api/seats')
         .send({
-          name: 'room name',
           room_ID: 1,
         })
         .then((response) => {
@@ -58,7 +57,7 @@ describe('GET climate zones by room id', () => {
         const newRoomId = await request(app)
             .post('/api/rooms')
             .send({
-              name: 'room name'
+              name: 'test room'
             })
             .then((response) => {
               return response.body.room_ID;
@@ -68,8 +67,10 @@ describe('GET climate zones by room id', () => {
             .post('/api/climateZones')
             .send({
               room_ID: newRoomId,
+              
             })
             .then((response) => {
+
               return response.body.climate_zone_ID;
             });
         await request(app)
@@ -84,37 +85,28 @@ describe('GET climate zones by room id', () => {
 describe('POST climateZone', () => {
   it('should add a climateZone', async (done) => {
     await request(app)
-        .post('/api/climateZones')
-        .send({
-          name: 'room name',
-          room_ID: 1,
-        })
+        .post('/api/seats')
+        .send({climate_zone_ID: 1})
         .then((response) => {
           expect(response.status).toBe(201);
           done();
         });
   });
 
-  it('should return 500 missing room_id', async (done) => {
+  it('should return 500 missing climate_zone_ID', async (done) => {
     await request(app)
-        .post('/api/climateZones')
-        .send(
-          {
-            name: 'room name',
-          }
-        )
+        .post('/api/seats')
+        .send({})
         .then((response) => {
           expect(response.status).toBe(500);
           done();
         });
   });
-
   it('should add a climateZone', async (done) => {
     await request(app)
-        .post('/api/climateZones')
+        .post('/api/seats')
         .send({
-          name: 'room name',
-          room_ID: 1,
+          climate_zone_ID: 1,
         })
         .then((response) => {
           expect(response.status).toBe(201);
@@ -123,19 +115,33 @@ describe('POST climateZone', () => {
   });
 });
 
-describe('DELETE climateZone', () => {
+describe('DELETE seat', () => {
   it('should return status code 200', async (done) => {
     const newRoomId = await request(app)
-        .post('/api/climateZones')
-        .send({
-          room_ID: 1,
-        })
+        .post('/api/rooms')
+        .send({name: 'new room'})
         .then((response) => {
-          return response.body.climate_zone_ID;
+
+          return response.body.room_ID;
         });
     
+    const newClimateZoneId = await request(app)
+        .post('/api/climateZones')
+        .send({room_ID: newRoomId})
+        .then((response) => {
+
+          return response.body.climate_zone_ID;
+        });
+
+    const newSeatId = await request(app)
+        .post('/api/seats')
+        .send({climate_zone_ID: newClimateZoneId})
+        .then((response) => {
+          return response.body.seat_ID;
+        });
+
     await request(app)
-        .delete('/api/climateZones/' + newRoomId)
+        .delete('/api/seats/' + newSeatId)
         .then((response) => {
           expect(response.status).toBe(200);
           done();
@@ -144,16 +150,29 @@ describe('DELETE climateZone', () => {
 
   it('should return a ID of the deleted climateZone', async (done) => {
     const newRoomId = await request(app)
+        .post('/api/rooms')
+        .send({name: 'new room'})
+        .then((response) => {
+          return response.body.room_ID;
+        });
+    
+    const newClimateZoneId = await request(app)
         .post('/api/climateZones')
-        .send({room_ID: 1})
+        .send({room_ID: newRoomId})
         .then((response) => {
           return response.body.climate_zone_ID;
         });
 
-    await request(app)
-        .delete('/api/climateZones/' + newRoomId)
+    const newSeatId = await request(app)
+        .post('/api/seats')
+        .send({climate_zone_ID: newClimateZoneId})
         .then((response) => {
-          expect(response.body.climate_zone_ID).toBeDefined();
+          return response.body.seat_ID;
+        });
+    await request(app)
+        .delete('/api/seats/' + newSeatId)
+        .then((response) => {
+          expect(response.body.seat_ID).toBeDefined();
           done();
         });
   });

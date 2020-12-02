@@ -30,5 +30,6 @@ require('./app/routes/users_routes/users.routes')(app);
 require('./app/routes/rooms_routes/rooms.routes')(app);
 require('./app/routes/climate_zones_routes/climateZones.routes')(app);
 require('./app/routes/presets_routes/presets.routes')(app);
+require('./app/routes/seats_routes/seats.routes')(app);
 
 module.exports = app;

@@ -16,7 +16,8 @@ exports.findAll = (req, res) => {
 };
 
 exports.addRoom = async (req, res) => {
-  Rooms.create({})
+  let {name} = req.body
+  Rooms.create({name})
       .then((result) => {
         res.status(201).send(result);
       }).catch((err) => {

@@ -77,6 +77,7 @@ exports.removeClimateZone = async (req, res) => {
       climate_zone_ID: climateZoneId,
     });
   }).catch((err) => {
+    console.log(err)
     res.send(500).send('internal error occured');
   });
 };
