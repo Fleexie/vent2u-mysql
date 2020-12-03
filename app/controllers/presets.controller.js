@@ -77,12 +77,18 @@ exports.addPreset = async (req, res) => {
 exports.changePreset = async (req, res) => {
   const {
     airflow,
+    FK_User,
+    FK_Climate_Zone
   } = req.body;
 
-  const {presetId} = req.params;
+  const { presetId } = req.params;
+  /**change fk user talk to frontend */
   preset.update(
       {
-        airflow,
+      airflow,
+      Firebase_User_ID: FK_User,
+      FK_Climate_Zone
+        
       },
       {where: {Preset_ID: presetId}}).then((result) => {
     res.status(201).send(result);
