@@ -34,15 +34,16 @@ describe('GET preset by id', () => {
     const newPreset = await request(app)
         .post('/api/presets/')
         .send({
-          airflow: 10,
-          FK_User: 1,
-          FK_Climate_Zone: 1,
+          airflow,
+          uid,
+         room,
+         zone
         }).then((response) => {
           return response.body;
         });
 
     await request(app)
-        .get('/api/presets/'+newPreset.preset_ID)
+        .get('/api/presets/'+newPreset.uid)
         .then((response) => {
           expect(response.body).toEqual(newPreset);
           done();
@@ -54,10 +55,12 @@ describe('POST presets', () => {
   it('should add a presets', async (done) => {
     await request(app)
         .post('/api/presets')
+        console.log(uid)
         .send({
-          airflow: 10,
-          FK_User: 1,
-          FK_Climate_Zone: 1,
+          airflow,
+          uid,
+          room,
+          zone
         })
         .then((response) => {
           expect(response.status).toBe(201);
