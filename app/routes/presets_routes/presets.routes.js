@@ -45,7 +45,7 @@ module.exports = (app) => {
    *       200:
    *         description: List of all presets
   */
-  router.get('/:uid', presets.getByUid);
+ router.get('/:presetId', presets.getPresetById);
 
   /**
      * @swagger

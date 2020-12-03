@@ -39,13 +39,15 @@ CREATE TABLE `seats` (
 
 CREATE TABLE `presets` (
   `preset_ID` INT NOT NULL AUTO_INCREMENT,
-  `airflow` INT(10) NULL,
-  `uid` VARCHAR(255) NOT NULL,
-  `room` INT NOT NULL,
-   `zone` INT NOT NULL,
+  `airflow` TINYINT(10) NULL,
+  `FK_User` INT NOT NULL,
+  `FK_Climate_Zone` INT NOT NULL,
   PRIMARY KEY (`preset_ID`),
+  FOREIGN KEY (FK_User) REFERENCES users(user_ID),
+  FOREIGN KEY (FK_Climate_Zone) REFERENCES climate_zones(climate_zone_ID),
   UNIQUE INDEX `preset_ID` (`preset_ID` ASC) VISIBLE);
 
+INSERT INTO users (user_ID) VALUES(1);
 
 insert into rooms (room_ID, `name`) values (1, 'copenhagen');
 insert into rooms (room_ID,`name`) values (2, 'valby');
@@ -104,5 +106,3 @@ insert into seats (seat_ID, FK_Climate_Zone) values (21, 4);
 insert into seats (seat_ID, FK_Climate_Zone) values (22, 4);
 insert into seats (seat_ID, FK_Climate_Zone) values (23, 4);
 insert into seats (seat_ID, FK_Climate_Zone) values (24, 4);
-
-insert into presets (airflow, uid , room, zone) values (1,"fdfsd",3, 1);

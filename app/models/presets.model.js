@@ -10,20 +10,16 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
 
         },
-        uid: {
+       Fk_User: {
             type: Sequelize.STRING,
 
         },
-       room : {
+       Fk_Climate_Zone: {
             type: Sequelize.INTEGER,
 
         },
-        zone : {
-            type: Sequelize.INTEGER,
-
-        }
     }, {
-        timestamps: true
+        timestamps: false
     });
 
     return Preset;

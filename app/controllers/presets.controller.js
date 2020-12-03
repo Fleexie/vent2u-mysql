@@ -1,39 +1,23 @@
 /* eslint-disable camelcase */
 const {preset} = require('../models');
 
-exports.getByUid = (req, res) => {
-  const uid = req.params.uid;
-  if (uid === 0) {
+
+exports.getPresetById = (req, res) => {
+  const testPresetId = req.params.presetId;
+  if (testPresetId === 0) {
     res.status(400).send({
       message: 'Chose a climate_zone id!',
     });
   }
-//   preset.findAll({
-//     limit: 1,
-//     where: { uid: `${uid}` 
-//        },
-//     order: [ [ 'createdAt', 'DESC' ]]
-//       })
-//   .then((data) => {
-//       res.send(data);
-//   }).catch(() => {
-//     res.status(500).send({
-//       message: `Error retrieving Preset with uid=${uid}`,
-//     });
-//   });
-// };
-preset.findAll({
-  limit: 1,
-  where: {
-   uid: `${uid}`
-  },
-  order: [ [ 'createdAt', 'DESC' ]]
-}).then(function(entries){
-  res.send(entries)
-  //only difference is that you get users list limited to 1
-  //entries[0]
-}); 
-}
+
+  preset.findByPk(testPresetId).then((data) => {
+    res.send(data);
+  }).catch(() => {
+    res.status(500).send({
+      message: `Error retrieving Preset with id=${testPresetId}`,
+    });
+  });
+};
 /*
 exports.getPresetsByRoomId = (req, res) => {
   const room_ID = req.params.room_ID;
@@ -70,16 +54,14 @@ exports.addPreset = async (req, res) => {
   console.log(req.body.uid)
   const {
     airflow,
-    uid,
-    room,
-    zone
+    FK_User,
+    FK_Climate_Zone,
   } = req.body;
   preset.create(
       {
         airflow,
-        uid,
-        room,
-        zone
+        FK_User,
+    FK_Climate_Zone,
       }).then((result) => {
     res.status(201).send(result);
   }).catch((err) => {
