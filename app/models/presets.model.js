@@ -10,11 +10,11 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
 
         },
-       Fk_User: {
+       Firebase_User_ID: {
             type: Sequelize.STRING,
 
         },
-       Fk_Climate_Zone: {
+       FK_Climate_Zone: {
             type: Sequelize.INTEGER,
 
         },

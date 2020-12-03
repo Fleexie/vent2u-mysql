@@ -3,19 +3,6 @@ CREATE DATABASE ventk2;
 
 USE ventk2;
 
-CREATE TABLE `users` (
-  `user_ID` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(255),
-  `password` VARCHAR(255),
-  PRIMARY KEY (`user_ID`),
-  UNIQUE INDEX `user_ID` (`user_ID` ASC) VISIBLE);
-
-CREATE TABLE `users_OLD` (
-  `user_ID` INT NOT NULL,
-  `name` VARCHAR(255),
-  `password` VARCHAR(255)
-)
-
 CREATE TABLE `rooms` (
   `room_ID` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
@@ -40,14 +27,12 @@ CREATE TABLE `seats` (
 CREATE TABLE `presets` (
   `preset_ID` INT NOT NULL AUTO_INCREMENT,
   `airflow` TINYINT(10) NULL,
-  `FK_User` INT NOT NULL,
+  `Firebase_User_ID` VARCHAR(28) NOT NULL,
   `FK_Climate_Zone` INT NOT NULL,
   PRIMARY KEY (`preset_ID`),
-  FOREIGN KEY (FK_User) REFERENCES users(user_ID),
   FOREIGN KEY (FK_Climate_Zone) REFERENCES climate_zones(climate_zone_ID),
   UNIQUE INDEX `preset_ID` (`preset_ID` ASC) VISIBLE);
 
-INSERT INTO users (user_ID) VALUES(1);
 
 insert into rooms (room_ID, `name`) values (1, 'copenhagen');
 insert into rooms (room_ID,`name`) values (2, 'valby');

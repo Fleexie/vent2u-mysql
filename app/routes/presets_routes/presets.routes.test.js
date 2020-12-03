@@ -35,13 +35,13 @@ describe('GET preset by id', () => {
         .post('/api/presets/')
         .send({
           airflow: 10,
-          FK_User: 1,
+          fireBaseId: '1',
           FK_Climate_Zone: 1,
 
         }).then((response) => {
           return response.body;
         });
-
+        console.log(newPreset)
     await request(app)
          .get('/api/presets/'+newPreset.preset_ID)
         .then((response) => {
@@ -53,15 +53,20 @@ describe('GET preset by id', () => {
 
 describe('POST presets', () => {
   it('should add a presets', async (done) => {
+    console.log({
+      airflow: 10,
+      fireBaseId: '1',
+      FK_Climate_Zone: 1,
+    })
     await request(app)
-        .post('/api/presets')
-        console.log(uid)
+        .post('/api/presets/')
         .send({
           airflow: 10,
-          FK_User: 1,
+          fireBaseId: '1',
           FK_Climate_Zone: 1,
         })
-        .then((response) => {
+          .then((response) => {
+          console.log(response)
           expect(response.status).toBe(201);
           done();
         });
@@ -73,7 +78,7 @@ describe('PUT presets', () => {
         .post('/api/presets/')
         .send({
           airflow: 10,
-          FK_User: 1,
+          fireBaseId: 1,
           FK_Climate_Zone: 1,
         }).then((response) => {
           return response.body;
@@ -94,7 +99,7 @@ describe('DELETE presets', () => {
         .post('/api/presets')
         .send({
           airflow: 10,
-          FK_User: 1,
+          fireBaseId: 1,
           FK_Climate_Zone: 1,
         })
         .then((response) => {
@@ -114,7 +119,7 @@ describe('DELETE presets', () => {
         .post('/api/presets')
         .send({
           airflow: 10,
-          FK_User: 1,
+          fireBaseId: 1,
           FK_Climate_Zone: 1,
         })
         .then((response) => {

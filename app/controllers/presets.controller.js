@@ -51,17 +51,22 @@ exports.findAll = (req, res) => {
 };
 
 exports.addPreset = async (req, res) => {
-  console.log(req.body.uid)
+  console.log(req.body)
   const {
     airflow,
-    FK_User,
+    fireBaseId,
     FK_Climate_Zone,
   } = req.body;
+  console.log({
+    airflow,
+    Firebase_User_ID: fireBaseId,
+    FK_Climate_Zone,
+  })
   preset.create(
       {
         airflow,
-        FK_User,
-    FK_Climate_Zone,
+        Firebase_User_ID: fireBaseId,
+        FK_Climate_Zone,
       }).then((result) => {
     res.status(201).send(result);
   }).catch((err) => {

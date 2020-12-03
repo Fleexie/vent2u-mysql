@@ -65,8 +65,8 @@ module.exports = (app) => {
      *             properties:
      *               airflow:
      *                 type: integer
-     *               FK_User:
-     *                 type: integer
+     *               fireBaseId:
+     *                 type: string
      *               FK_Climate_Zone:
      *                 type: integer
      *     responses:
