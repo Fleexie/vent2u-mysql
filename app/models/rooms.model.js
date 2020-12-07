@@ -1,15 +1,12 @@
 module.exports = (sequelize, Sequelize) => {
     const Room = sequelize.define("rooms", {
-        id: {
+        room_ID: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        UID: {
-            type: Sequelize.INTEGER,
-            foreignKey: true,
-            required: false
-        }
+        name: Sequelize.STRING
+
     }, {
         timestamps: false
     });
