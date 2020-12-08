@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const cors = require("cors");
-
+const passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
 const app = express();
 app.use(cors());
 
@@ -9,8 +10,16 @@ const db = require("./app/models");
 
 db.sequelize.sync();
 
+passport.serializeUser(function(user, done) {
+    done(null, {id: user.id, email: user.email});
+  });
+  
+  passport.deserializeUser(function(user, done) {
+    done(null, {id: user.id, email: user.email});
+  });
 app.use(bodyparser.json());
-
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(bodyparser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
