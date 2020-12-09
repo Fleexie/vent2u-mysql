@@ -23,8 +23,9 @@ db.sequelize = sequelize;
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.role = require("./role.model.js")(sequelize, Sequelize);
 db.room = require("./room.model.js")(sequelize, Sequelize);
-
-
+db.seat = require("./seat.model.js")(sequelize, Sequelize);
+db.preset = require("./presets.model.js")(sequelize, Sequelize);
+db.zone = require("./zone.model.js")(sequelize, Sequelize);
 //  We use Users.belongsToMany(Role) to indicate that the user model can belong to many Roles and vice versa.
 
 //  The association between Users and Roles is Many-to-Many relationship:
@@ -42,5 +43,6 @@ db.room = require("./room.model.js")(sequelize, Sequelize);
 // });
 
 db.ROLES = ["user", "admin", "moderator"];
+
 
 module.exports = db;
