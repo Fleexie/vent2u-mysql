@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/user.routes")(app);
-require("./app/routes/room.routes")(app);
+require("./app/routes/checkin.routes")(app);
 require("./app/routes/auth.routes")(app);
 const PORT = process.env.PORT || 8080;
 
