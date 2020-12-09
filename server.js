@@ -1,25 +1,6 @@
-const express = require("express");
-const bodyparser = require("body-parser");
-const cors = require("cors");
 
-const app = express();
-app.use(cors());
+const app = require('./app')
 
-const db = require("./app/models");
-
-db.sequelize.sync();
-
-app.use(bodyparser.json());
-
-app.use(bodyparser.urlencoded({ extended: true }));
-
-app.get("/", (req, res) => {
-    res.json({ message: "Mental Shower DB" });
-});
-
-require("./app/routes/settings.routes")(app);
-require("./app/routes/users.routes")(app);
-require("./app/routes/rooms.routes")(app);
 // require("./app/routes/login.routes")(app);
 const PORT = process.env.PORT || 8080;
 

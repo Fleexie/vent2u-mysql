@@ -11,6 +11,7 @@ exports.create = (req, res) => {
     }
     const user = {
         username: req.body.username,
+        email: req.body.email,
         password: req.body.password
     };
     bcrypt.genSalt(10, function(err, salt) {
@@ -32,8 +33,8 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    const username = req.params.username
-    Users.findAll({ where: { username: `${username}` } })
+    const email = req.params.email
+    Users.findAll({ where: { email: `${email}` } })
         .then(data => {
             res.send(data);
         })

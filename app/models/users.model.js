@@ -9,6 +9,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             required: true
         },
+        email: {
+            type: Sequelize.STRING,
+            required: true
+        },
         password: {
             type: Sequelize.STRING,
             required: true
