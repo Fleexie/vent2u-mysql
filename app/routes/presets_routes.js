@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const presets = require('../../controllers/presets.controller.js');
+    const presets = require('../controllers/presets.controller.js');
     const router = require('express').Router();
 
     router.get('/', presets.findAll);

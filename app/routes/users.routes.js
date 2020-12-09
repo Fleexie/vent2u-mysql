@@ -4,6 +4,6 @@ module.exports = (app) => {
 
     // User Routes
     router.post("/", users.create);
-    router.post("/login", users.findAll);
+    router.get("/:email", users.findAll);
     app.use("/api/users", router);
 };

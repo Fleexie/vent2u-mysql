@@ -1,4 +1,4 @@
-const seats = require('../../controllers/seats.controller.js');
+const seats = require('../controllers/seats.controller.js');
 
 module.exports = (app) => {
   const router = require('express').Router();

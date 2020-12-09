@@ -1,4 +1,4 @@
-const climateZones = require('../../controllers/climateZones.controller.js');
+const climateZones = require('../controllers/climateZones.controller.js');
 
 module.exports = (app) => {
   const router = require('express').Router();
@@ -13,5 +13,5 @@ module.exports = (app) => {
   router.post('/climateZones', climateZones.addClimateZone);
   router.delete('/climateZones/:climateZoneId', climateZones.removeClimateZone);
 
-  app.use('/api/', router);
+  app.use('/api', router);
 };
