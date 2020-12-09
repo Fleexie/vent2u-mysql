@@ -6,7 +6,5 @@ module.exports = (app) => {
 
     router.post('/', rooms.addRoom);
 
-    router.delete('/:id', rooms.removeRoom);
-  
-    app.use('/api/rooms', router);
-  };
+    app.use("/api/rooms", router);
+};
