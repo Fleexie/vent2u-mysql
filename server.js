@@ -1,6 +1,26 @@
 
 const app = require('./app')
 
+const db = require("./app/models");
+
+db.sequelize.sync({force: true}).then(() => {
+    console.log('Drop and resync database')
+});
+
+// parse requests of content-type - application/json
+app.use(bodyparser.json());
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyparser.urlencoded({ extended: true }));
+
+// simple route
+app.get("/", (req, res) => {
+    res.json({ message: "Mental Shower DB" });
+});
+
+require("./app/routes/user.routes")(app);
+require("./app/routes/room.routes")(app);
+require("./app/routes/auth.routes")(app);
 // require("./app/routes/login.routes")(app);
 const PORT = process.env.PORT || 8080;
 

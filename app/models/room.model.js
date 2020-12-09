@@ -5,8 +5,10 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        name: Sequelize.STRING
-
+        name: {
+            type: Sequelize.STRING,
+            required: true
+        }
     }, {
         timestamps: false
     });
