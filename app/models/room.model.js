@@ -5,10 +5,9 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        UID: {
-            type: Sequelize.INTEGER,
-            foreignKey: true,
-            required: false
+        name: {
+            type: Sequelize.STRING,
+            required: true
         }
     }, {
         timestamps: false

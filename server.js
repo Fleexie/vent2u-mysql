@@ -7,20 +7,24 @@ app.use(cors());
 
 const db = require("./app/models");
 
-db.sequelize.sync();
+db.sequelize.sync({force: true}).then(() => {
+    console.log('Drop and resync database')
+});
 
+// parse requests of content-type - application/json
 app.use(bodyparser.json());
 
+// parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyparser.urlencoded({ extended: true }));
 
+// simple route
 app.get("/", (req, res) => {
     res.json({ message: "Mental Shower DB" });
 });
 
-require("./app/routes/settings.routes")(app);
-require("./app/routes/users.routes")(app);
-require("./app/routes/rooms.routes")(app);
-// require("./app/routes/login.routes")(app);
+require("./app/routes/user.routes")(app);
+require("./app/routes/room.routes")(app);
+require("./app/routes/auth.routes")(app);
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
