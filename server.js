@@ -14,7 +14,7 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-    res.json({ message: "Vent2U Group Anina, Mathias and Jannick" });
+    res.json({ message: "Mental Shower DB" });
 });
 
 require("./app/routes/settings.routes")(app);
@@ -25,5 +25,5 @@ const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
-    
+
 });
