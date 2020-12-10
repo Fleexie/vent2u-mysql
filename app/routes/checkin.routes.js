@@ -8,22 +8,22 @@ module.exports = (app) => {
 
   // Rooms Routes
   router.get('room', room.findAll);
-  router.post('room', room.addRoom);
-  router.delete('room/:id', room.removeRoom);
+  router.post('room', room.add);
+  router.delete('room/:id', room.delete);
 
   // Zone Routes
   router.get('zone', zone.findAll);
-  router.get('zone/ById/:zone_id', zone.getClimateZoneById);
-  router.get('zone/ByRoomId/:room_id', zone.getClimateZoneByRoomId);
-  router.post('zone', climateZones.addClimateZone);
-  router.delete('zone/:climateZoneId', climateZones.removeClimateZone);
+  router.get('zone/ById/:zone_id', zone.findById);
+  router.get('zone/ByRoomId/:room_id', zone.findByRoom);
+  router.post('zone', zone.add);
+  router.delete('zone/:climateZoneId', zone.delete);
 
   // Seat Routes
   router.get("seat", seat.findAll);
-  router.get('seat/ById/:seat_ID', seat.getSeatById);
-  router.get('seat/ByZoneId/:zone_id', seat.getSeatsByClimateZoneId);
-  router.post('seat', seat.addSeat);
-  router.delete('seat/:seat_id', seat.removeSeat);
+  router.get('seat/ById/:seat_ID', seat.findById);
+  router.get('seat/ByZoneId/:zone_id', seat.findByZone);
+  router.post('seat', seat.add);
+  router.delete('seat/:seat_id', seat.delete);
 
   // Master Route
   app.use("/api/", router);

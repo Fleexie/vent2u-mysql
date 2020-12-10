@@ -1,9 +1,9 @@
 const db = require("../models");
-const rooms = db.rooms;
-const Rooms = rooms;
+const room = db.room;
+const Room = room;
 
 exports.findAll = (req, res) => {
-    Rooms.findAll()
+    Room.findAll()
         .then(data => {
             res.send(data);
         })
@@ -12,4 +12,10 @@ exports.findAll = (req, res) => {
                 message: err.message || "Some error occurred while retrieving settings."
             });
         });
+}
+exports.add = (req, res) => {
+
+}
+exports.delete = (req, res) => {
+
 }

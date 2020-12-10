@@ -7,13 +7,15 @@ CREATE TABLE `users`(
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `username` VARCHAR(55) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(255) NOT NULL
+  `password` VARCHAR(255) NOT NULL,
+  `role` VARCHAR(30)
 );
 
 CREATE TABLE `rooms` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL,
-    UNIQUE INDEX `id` (`id` ASC) VISIBLE);
+    UNIQUE INDEX `id` (`id` ASC) VISIBLE
+);
 
 CREATE TABLE `zones` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -36,20 +38,61 @@ CREATE TABLE `presets` (
     `airflow` INT NULL,
     `zone_id` INT NULL,
     `user_id` INT NOT NULL,
+#     This should maybe be deleted, due to guests.
     FOREIGN KEY (user_id) REFERENCES users(id),
     UNIQUE INDEX `id` (`id` ASC) VISIBLE
 );
+CREATE TABLE `old_presets` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `airflow` INT NULL,
+    `zone_id` INT NULL,
+    `user_id` INT NOT NULL,
+ #     This should maybe be deleted, due to guests.
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    UNIQUE INDEX `id` (`id` ASC) VISIBLE
+);
+CREATE TABLE `guest_preset` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `airflow` INT NULL,
+    `zone_id` INT NULL,
+    `guest_id` INT NOT NULL
+);
+
+CREATE TABLE `roles` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(24)
+);
+
+# This should take the avg airflow from presets with zone_id(x)
+# And then update zone where id = x
+# With the avg of airflow from presets
+DELIMITER //
+CREATE PROCEDURE zone_air(IN currentZone INT)
+BEGIN
+#     SELECT Avg(airflow) AS airAvg FROM presets WHERE zone_id LIKE currentZone;
+    UPDATE zones SET airflow = (SELECT AVG(airflow) FROM presets WHERE zone_id LIKE currentZone) WHERE id LIKE currentZone;
+END //
+DELIMITER ;
+
+DELIMITER //
+
+DELIMITER //;
+
+
+
+# CALL zone_air(zone);
+
 
 # DATA BELOW
-insert into users (id, username, email, password) values (1, 'root', 'email@email.com', 'root');
-insert into users (id, username, email, password) values (2, 'test1', 'test1@email.com', 'root');
-insert into users (id, username, email, password) values (3, 'test2', 'test2@email.com', 'root');
+insert into users (id, username, email, password, role) values (1, 'root', 'email@email.com', 'root', 'admin');
+insert into users (id, username, email, password, role) values (2, 'test1', 'test1@email.com', 'root', 'mod');
+insert into users (id, username, email, password, role) values (3, 'test2', 'test2@email.com', 'root', 'user');
 
 insert into rooms (id, `name`) values (1, 'Eswatini');
 insert into rooms (id,`name`) values (2, 'Delhi');
 insert into rooms (id,`name`) values (3, 'Harare');
 insert into rooms (id, `name`) values (4, 'Banjul');
-
+INSERT INTO roles (id, name) values (1, 'user'), (2, 'mod'), (3, 'admin');
 insert into zones (id, room_id) values (1, 1);
 insert into zones (id, room_id) values (2, 1);
 insert into zones (id, room_id) values (3, 1);
@@ -74,6 +117,7 @@ insert into zones (id, room_id) values (18, 4);
 insert into zones (id, room_id) values (19, 4);
 insert into zones (id, room_id) values (20, 4);
 
+insert into presets (airflow, zone_id, user_id) values (20, 1, 1), (50, 1, 2), (100, 1, 2);
 
 INSERT INTO `seats` (`id`, `zone_id`, `occupied`) VALUES
 (1, 1, 0),
