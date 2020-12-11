@@ -4,7 +4,7 @@ module.exports = {
   PASSWORD: "gruppe3",
   DB: "fleexiedesigns_comvent2u",
   dialect: "mysql",
-  PORT: "3306",
+  PORT: "process.env.PORT || 3306",
   pool: {
     max: 5,
     min: 0,
