@@ -16,5 +16,5 @@ module.exports = (sequelize, Sequelize) => {
         timestamps: false
     });
 
-    return Room;
+    return Zone;
 };

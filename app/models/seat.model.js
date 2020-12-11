@@ -5,7 +5,11 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        zone: {
+        zone_id: {
+            type: Sequelize.INTEGER,
+            required: true
+        },
+        room_id: {
             type: Sequelize.INTEGER,
             required: true
         },
