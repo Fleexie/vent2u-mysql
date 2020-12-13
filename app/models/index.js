@@ -31,17 +31,17 @@ db.preset = require("./preset.model.js")(sequelize, Sequelize);
 //  The association between Users and Roles is Many-to-Many relationship:
 //  – One User can have several Roles.
 //  – One Role can be taken on by many Users.
-// db.role.belongsToMany(db.user, {
-//     through: "user_roles",
-//     foreignKey: "roleId",
-//     otherKey: "userId"
-// });
-// db.user.belongsToMany(db.role, {
-//     through: "user_roles",
-//     foreignKey: "userId",
-//     otherKey: "roleId"
-// });
+db.role.belongsToMany(db.user, {
+    through: "role",
+    foreignKey: "roleId",
+    otherKey: "userId"
+});
+db.user.belongsToMany(db.role, {
+    through: "role",
+    foreignKey: "userId",
+    otherKey: "roleId"
+});
 
-db.ROLES = ["user", "admin", "moderator"];
+db.ROLE = ["user", "admin", "moderator"];
 
 module.exports = db;

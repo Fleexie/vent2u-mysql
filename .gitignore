@@ -6,3 +6,4 @@
 .idea/vcs.xml
 .idea/vent2u-mysql.iml
 .idea/workspace.xml
+app/config/db.config.js
