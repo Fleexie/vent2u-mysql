@@ -1,10 +1,10 @@
 module.exports = {
-  HOST: "localhost",
-  USER: "root",
-  PASSWORD: "",
-  DB: "db_tester",
+  HOST: "fleexiedesigns.com.mysql",
+  USER: "fleexiedesigns_comvent2u",
+  PASSWORD: "gruppe3",
+  DB: "fleexiedesigns_comvent2u",
   dialect: "mysql",
-  PORT: "3307",
+  PORT: process.env.PORT || 3306,
   pool: {
     max: 5,
     min: 0,
